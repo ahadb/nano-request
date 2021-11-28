@@ -2,6 +2,8 @@
 
 A tiny promise wrapper around xmlHttpRequest ...
 
+### Signature
+
 ```javascript
 /**
  * Check if value is undefined
@@ -18,7 +20,7 @@ function isUndefined(val) {
  * @param  {} options
  * @param  {} timeout
  * @todo: add timeout specific to cancel the request
- * 
+ *
  * @returns promise over xmlhttprequest
  */
 
@@ -92,4 +94,28 @@ function nanoRequest(options, timeout) {
     xhr.send(params)
   })
 }
+```
+
+### Usage
+
+```javascript
+// a. promise
+nanoRequest({
+  method: 'GET',
+  url: 'https://swapi.dev/api/people/1/',
+})
+  .then(function (data) {
+    console.log(data)
+  })
+  .catch(function (error) {
+    console.error('Uggh, there was an error!', error.status)
+  })
+
+// b. async / await
+async function fetchData() {
+  try {
+    const response = await nanoRequest({method: 'GET', url: 'https://swapi.dev/api/people/1/'})
+  } catch(error) {
+      console.error('Uggh, there was an error!', err.status)
+  }
 ```
